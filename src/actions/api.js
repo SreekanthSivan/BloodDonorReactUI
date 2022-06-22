@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const baseUrl = "http://localhost:60671/api/"
-const azureUrl = "http://blooddonorapiservice2022.azurewebsites.net/api/"
+const azureUrl = "https://blooddonorapiservice2022.azurewebsites.net/api/"
 
 
 export default {
