@@ -12,7 +12,7 @@ function App() {
     <Provider store={store}>
       <ToastProvider autoDismiss={true}>
         <Container maxWidth="lg">
-          <h1>Blood Donors test checkin</h1>
+          <h1>Blood Donors..............</h1>
           <DCandidates />
         </Container>
       </ToastProvider>
