@@ -31,5 +31,11 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     contents: 'package.json' 
-    targetFolder: $(Build.ArtifactStagingDirectory)
+    targetFolder: $(Build.ArtifactStagingDirectory)/npm
   displayName: 'Copy package.json'   
+
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Build.ArtifactStagingDirectory)/npm'
+    artifactName: npm
+  displayName: 'Publish npm artifact'
