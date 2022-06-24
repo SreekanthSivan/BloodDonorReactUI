@@ -31,5 +31,5 @@ steps:
   inputs:
     sourceFolder: '$(Build.SourcesDirectory)'
     contents: 'package.json' 
-    targetFolder: $(Build.ArtifactStagingDirectory)/npm
+    targetFolder: $(Build.ArtifactStagingDirectory)
   displayName: 'Copy package.json'   
