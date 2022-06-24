@@ -44,4 +44,4 @@ steps:
     PathtoPublish: '$(Build.ArtifactStagingDirectory)'
     ArtifactName: 'drop'
     publishLocation: 'FilePath'
-    TargetPath: '$(Build.ArtifactStagingDirectory)/drop'
+    TargetPath: '$(Build.ArtifactStagingDirectory)\drop'
