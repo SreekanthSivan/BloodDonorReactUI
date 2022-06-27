@@ -1,9 +1,5 @@
 import axios from "axios";
 
-const baseUrl = "http://localhost:60671/api/"
-const azureUrl = "https://blooddonorapiservice2022.azurewebsites.net/api/"
-
-
 export default {
 
     dCandidate(url = process.env.REACT_APP_API_URL + 'dcandidate/') {

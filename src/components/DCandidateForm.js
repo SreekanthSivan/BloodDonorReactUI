@@ -82,6 +82,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                 props.createDCandidate(values, onSuccess)
             else
                 props.updateDCandidate(props.currentId, values, onSuccess)
+                props.setOpenModal(false);
         }
     }
 

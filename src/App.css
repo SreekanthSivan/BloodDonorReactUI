@@ -36,3 +36,19 @@
     transform: rotate(360deg);
   }
 }
+
+.floatRight {
+  float: right;;
+}
+.mrg-left-15{
+  margin-left: 15px;
+}
+.mrg-right-15{
+  margin-right: 15px;
+}
+.mrg-top-5{
+  margin-top: 5px;
+}
+.mrg-top-15{
+  margin-top: 15px;
+}
