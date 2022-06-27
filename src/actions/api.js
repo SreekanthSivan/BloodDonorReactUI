@@ -6,7 +6,7 @@ const azureUrl = "https://blooddonorapiservice2022.azurewebsites.net/api/"
 
 export default {
 
-    dCandidate(url = azureUrl + 'dcandidate/') {
+    dCandidate(url = process.env.REACT_APP_API_URL + 'dcandidate/') {
         return {
             fetchAll: () => axios.get(url),
             fetchById: id => axios.get(url + id),
