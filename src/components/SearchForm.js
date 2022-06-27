@@ -34,7 +34,7 @@ const SearchForm = ({ classes, ...props }) => {
         setErrors,
         handleInputChange,
         resetForm
-    } = useForm(initialFieldValues, null, props.setCurrentId)
+    } = useForm(initialFieldValues, ()=>{}, props.setCurrentId)
 
     //material-ui select
     const inputLabel = React.useRef(null);
@@ -49,6 +49,14 @@ const SearchForm = ({ classes, ...props }) => {
 
     }
 
+    let addNewButton;
+    if(props.isLoggedIn){
+        addNewButton = <AddNewModal
+        openModal={props.openModal}
+        setOpenModal={props.setOpenModal}
+        currentId={props.currentId}
+        setCurrentId={props.setCurrentId} />
+    }
     return (
         <div className="mrg-left-15 mrg-right-15">
             <Paper className={classes.paper} elevation={3}>
@@ -101,11 +109,7 @@ const SearchForm = ({ classes, ...props }) => {
                             </div>
                         </Grid>
                         <Grid item xs={5}>
-                            <AddNewModal
-                                openModal={props.openModal}
-                                setOpenModal={props.setOpenModal}
-                                currentId={props.currentId}
-                                setCurrentId={props.setCurrentId} />
+                            {addNewButton}
                         </Grid>
                     </Grid>
                 </form>

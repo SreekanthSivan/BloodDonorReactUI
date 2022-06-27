@@ -71,12 +71,12 @@ const DCandidates = ({ classes, ...props }) => {
                                             <TableCell>{record.email}</TableCell>
                                             <TableCell>{record.address}</TableCell>
                                             <TableCell>
-                                                <ButtonGroup variant="text">
+                                               {props.isLoggedIn &&  <ButtonGroup variant="text">
                                                     <Button><EditIcon color="primary"
                                                         onClick={() => { onEdit(record.id) }} /></Button>
                                                     <Button><DeleteIcon color="secondary"
                                                         onClick={() => onDelete(record.id)} /></Button>
-                                                </ButtonGroup>
+                                                </ButtonGroup>}
                                             </TableCell>
                                         </TableRow>)
                                     })
