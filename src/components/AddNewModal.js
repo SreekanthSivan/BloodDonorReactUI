@@ -40,7 +40,9 @@ const AddNewModal = ({ classess, ...props }) => {
     const body = (
         <div style={modalStyle} className={classes.paper}>
             <h2>Add new donor</h2>
-            <DCandidateForm {...({ currentId:props.currentId, setCurrentId:props.setCurrentId, setOpenModal: props.setOpenModal })}/>
+            <div className="addNewCandidate">
+                <DCandidateForm {...({ currentId: props.currentId, setCurrentId: props.setCurrentId, setOpenModal: props.setOpenModal })} />
+            </div>
         </div>
     );
 

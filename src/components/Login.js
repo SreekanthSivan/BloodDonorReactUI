@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, TextField, Button} from "@material-ui/core";
+import { Grid, TextField, Button } from "@material-ui/core";
 import useForm from './useForm';
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -34,7 +34,7 @@ export default function Login(props) {
             temp.userName = fieldValues.userName ? "" : "This field is required."
         if ('password' in fieldValues)
             temp.password = fieldValues.password ? "" : "This field is required."
-       
+
         setErrors({
             ...temp
         })
@@ -49,7 +49,7 @@ export default function Login(props) {
         setErrors,
         handleInputChange,
         resetForm
-    } = useForm(initialFieldValues, validate, ()=>{})
+    } = useForm(initialFieldValues, validate, () => { })
 
     const handleSubmit = e => {
         e.preventDefault()
@@ -60,36 +60,37 @@ export default function Login(props) {
     }
 
     return (
-       
-        <form autoComplete="off" noValidate className={classes.root} onSubmit={handleSubmit}>
-            <Grid container>
-                <Grid item xs={6}>
-                    <TextField
-                        name="userName"
-                        variant="outlined"
-                        label="User Name"
-                        value={values.userName}
-                        onChange={handleInputChange}
-                        {...(errors.userName && { error: true, helperText: errors.userName })}
-                    />
-                    <TextField
-                        name="password"
-                        type="password"
-                        variant="outlined"
-                        label="Password"
-                        value={values.password}
-                        onChange={handleInputChange}
-                        {...(errors.password && { error: true, helperText: errors.password })}
-                    />
-                     <Button
+        <div className='loginModal'>
+            <form autoComplete="off" noValidate className={classes.root} onSubmit={handleSubmit}>
+                <Grid container>
+                    <Grid item xs={12}>
+                        <TextField
+                            name="userName"
+                            variant="outlined"
+                            label="User Name"
+                            value={values.userName}
+                            onChange={handleInputChange}
+                            {...(errors.userName && { error: true, helperText: errors.userName })}
+                        />
+                        <TextField
+                            name="password"
+                            type="password"
+                            variant="outlined"
+                            label="Password"
+                            value={values.password}
+                            onChange={handleInputChange}
+                            {...(errors.password && { error: true, helperText: errors.password })}
+                        />
+                        <Button
                             variant="contained"
                             color="primary"
                             type="submit"
                             className={classes.smMargin}>
                             Login
                         </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </form>
+            </form>
+        </div>
     )
 }

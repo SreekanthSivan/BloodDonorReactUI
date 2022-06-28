@@ -27,11 +27,14 @@ const initialFieldValues = {
     email: '',
     age: '',
     bloodGroup: '',
-    address: ''
+    address: '',
+    location: '',
+    addressProff: ''
 }
 
 const DCandidateForm = ({ classes, ...props }) => {
 
+    const [selectedFile, setSelectedFile] = useState(null);
     //toast msg.
     const { addToast } = useToasts()
 
@@ -47,6 +50,10 @@ const DCandidateForm = ({ classes, ...props }) => {
             temp.bloodGroup = fieldValues.bloodGroup ? "" : "This field is required."
         if ('email' in fieldValues)
             temp.email = (/^$|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
+        if ('location' in fieldValues)
+            temp.location = fieldValues.location ? "" : "This field is required."
+        if ('addressProff' in fieldValues)
+            temp.addressProff = fieldValues.addressProff ? "" : "This field is required."
         setErrors({
             ...temp
         })
@@ -82,7 +89,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                 props.createDCandidate(values, onSuccess)
             else
                 props.updateDCandidate(props.currentId, values, onSuccess)
-                props.setOpenModal(false);
+            props.setOpenModal(false);
         }
     }
 
@@ -108,12 +115,12 @@ const DCandidateForm = ({ classes, ...props }) => {
                         {...(errors.fullName && { error: true, helperText: errors.fullName })}
                     />
                     <TextField
-                        name="email"
+                        name="mobile"
                         variant="outlined"
-                        label="Email"
-                        value={values.email}
+                        label="Mobile"
+                        value={values.mobile}
                         onChange={handleInputChange}
-                        {...(errors.email && { error: true, helperText: errors.email })}
+                        {...(errors.mobile && { error: true, helperText: errors.mobile })}
                     />
                     <FormControl variant="outlined"
                         className={classes.formControl}
@@ -138,17 +145,17 @@ const DCandidateForm = ({ classes, ...props }) => {
                         </Select>
                         {errors.bloodGroup && <FormHelperText>{errors.bloodGroup}</FormHelperText>}
                     </FormControl>
+                    <TextField
+                        name="addressProff"
+                        type="file"
+                        variant="outlined"
+                        value={values.addressProff}
+                        onChange={handleInputChange}
+                        {...(errors.addressProff && { error: true, helperText: errors.addressProff })}
+                    />
                 </Grid>
                 <Grid item xs={6}>
 
-                    <TextField
-                        name="mobile"
-                        variant="outlined"
-                        label="Mobile"
-                        value={values.mobile}
-                        onChange={handleInputChange}
-                        {...(errors.mobile && { error: true, helperText: errors.mobile })}
-                    />
                     <TextField
                         name="age"
                         variant="outlined"
@@ -157,13 +164,29 @@ const DCandidateForm = ({ classes, ...props }) => {
                         onChange={handleInputChange}
                     />
                     <TextField
+                        name="email"
+                        variant="outlined"
+                        label="Email"
+                        value={values.email}
+                        onChange={handleInputChange}
+                        {...(errors.email && { error: true, helperText: errors.email })}
+                    />
+                    <TextField
+                        name="location"
+                        variant="outlined"
+                        label="Location"
+                        value={values.location}
+                        onChange={handleInputChange}
+                        {...(errors.location && { error: true, helperText: errors.location })}
+                    />
+                    <TextField
                         name="address"
                         variant="outlined"
                         label="Address"
                         value={values.address}
                         onChange={handleInputChange}
                     />
-                    <div>
+                    <div className="floatRight mrg-top-5">
                         <Button
                             variant="contained"
                             color="primary"
