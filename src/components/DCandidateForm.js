@@ -134,6 +134,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                         label="Full Name"
                         value={values.fullName}
                         onChange={handleInputChange}
+                        autoFocus
                         {...(errors.fullName && { error: true, helperText: errors.fullName })}
                     />
                     <TextField

@@ -20,8 +20,8 @@ const useStyles = makeStyles(theme => ({
 
 const FileUploadPage = (props) => {
     const [selectedFile, setSelectedFile] = useState();
-    // const [isFilePicked, setIsFilePicked] = useState(false);
-    const { saveSelectedFile,isFilePicked, setIsFilePicked } = props;
+    const [isFilePicked, setIsFilePicked] = useState(false);
+    const { saveSelectedFile } = props;
     const classes = useStyles();
     const changeHandler = (event) => {
         setSelectedFile(event.target.files[0]);

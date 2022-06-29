@@ -70,6 +70,7 @@ export default function Login(props) {
                             label="User Name"
                             value={values.userName}
                             onChange={handleInputChange}
+                            autoFocus
                             {...(errors.userName && { error: true, helperText: errors.userName })}
                         />
                         <TextField
