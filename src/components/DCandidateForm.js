@@ -4,6 +4,7 @@ import useForm from "./useForm";
 import { connect } from "react-redux";
 import * as actions from "../actions/dCandidate";
 import { useToasts } from "react-toast-notifications";
+import FileUploadPage from "./FileUploadPage";
 
 const styles = theme => ({
     root: {
@@ -29,15 +30,12 @@ const initialFieldValues = {
     bloodGroup: '',
     address: '',
     location: '',
-    addressProff: ''
+    imageUrl: ''
 }
 
 const DCandidateForm = ({ classes, ...props }) => {
 
-    const [selectedFile, setSelectedFile] = useState(null);
-    //toast msg.
     const { addToast } = useToasts()
-
     //validate()
     //validate({fullName:'jenny'})
     const validate = (fieldValues = values) => {
@@ -52,8 +50,7 @@ const DCandidateForm = ({ classes, ...props }) => {
             temp.email = (/^$|.+@.+..+/).test(fieldValues.email) ? "" : "Email is not valid."
         if ('location' in fieldValues)
             temp.location = fieldValues.location ? "" : "This field is required."
-        if ('addressProff' in fieldValues)
-            temp.addressProff = fieldValues.addressProff ? "" : "This field is required."
+
         setErrors({
             ...temp
         })
@@ -85,6 +82,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                 resetForm()
                 addToast("Submitted successfully", { appearance: 'success' })
             }
+
             if (props.currentId == 0)
                 props.createDCandidate(values, onSuccess)
             else
@@ -93,6 +91,22 @@ const DCandidateForm = ({ classes, ...props }) => {
         }
     }
 
+    const saveSelectedFile = (formData) => {
+        const onFileSuccess = (response) => {
+            const fieldValue = { ['imageUrl']: response.url }
+            setValues({
+                ...values,
+                ...fieldValue
+            })
+
+            addToast("File uploaded successfully", { appearance: 'success' })
+        }
+        props.uploadFile(formData, onFileSuccess);
+    }
+    const onDownloadFile = () => {
+        let filename = values.imageUrl;
+        props.downloadFile(filename);
+    }
     useEffect(() => {
         if (props.currentId != 0) {
             setValues({
@@ -102,6 +116,14 @@ const DCandidateForm = ({ classes, ...props }) => {
         }
     }, [props.currentId])
 
+    let fileUpload = props.currentId != 0 && values.imageUrl ?
+        (<div  className="mrg-left-15 mrg-top-5"><Button
+            variant="contained"
+            className={classes.smMargin}
+            onClick={onDownloadFile}>
+            Download
+        </Button></div>)
+        : (<FileUploadPage saveSelectedFile={saveSelectedFile} />)
     return (
         <form autoComplete="off" noValidate className={classes.root} onSubmit={handleSubmit}>
             <Grid container>
@@ -145,14 +167,7 @@ const DCandidateForm = ({ classes, ...props }) => {
                         </Select>
                         {errors.bloodGroup && <FormHelperText>{errors.bloodGroup}</FormHelperText>}
                     </FormControl>
-                    <TextField
-                        name="addressProff"
-                        type="file"
-                        variant="outlined"
-                        value={values.addressProff}
-                        onChange={handleInputChange}
-                        {...(errors.addressProff && { error: true, helperText: errors.addressProff })}
-                    />
+                    {fileUpload}
                 </Grid>
                 <Grid item xs={6}>
 
@@ -186,6 +201,8 @@ const DCandidateForm = ({ classes, ...props }) => {
                         value={values.address}
                         onChange={handleInputChange}
                     />
+                </Grid>
+                <Grid item xs={12}>
                     <div className="floatRight mrg-top-5">
                         <Button
                             variant="contained"
@@ -216,7 +233,9 @@ const mapStateToProps = state => ({
 
 const mapActionToProps = {
     createDCandidate: actions.create,
-    updateDCandidate: actions.update
+    updateDCandidate: actions.update,
+    uploadFile: actions.upload,
+    downloadFile: actions.download
 }
 
 export default connect(mapStateToProps, mapActionToProps)(withStyles(styles)(DCandidateForm));

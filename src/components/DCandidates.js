@@ -67,7 +67,7 @@ const DCandidates = ({ classes, ...props }) => {
                                             <TableCell>{record.mobile}</TableCell>
                                             <TableCell>{record.bloodGroup}</TableCell>
                                             <TableCell>{record.age}</TableCell>
-                                            <TableCell>&nbsp;</TableCell>
+                                            <TableCell>{record.location}</TableCell>
                                             <TableCell>{record.email}</TableCell>
                                             <TableCell>{record.address}</TableCell>
                                             <TableCell>

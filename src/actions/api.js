@@ -10,5 +10,15 @@ export default {
             update: (id, updateRecord) => axios.put(url + id, updateRecord),
             delete: id => axios.delete(url + id)
         }
+    },
+    files(url = process.env.REACT_APP_API_URL + 'file/') {
+        return {
+            uploadFile: formData => axios.post(url + 'upload/', formData, {
+                headers: {
+                  'Content-Type': 'multipart/form-data'
+                }
+            }),
+            downloadFile: fileName => axios.get(url + 'download/', fileName)
+        }
     }
 }
