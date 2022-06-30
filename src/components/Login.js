@@ -87,7 +87,7 @@ export default function Login(props) {
                             color="primary"
                             type="submit"
                             className={classes.smMargin}>
-                            Login - new
+                            Login
                         </Button>
                     </Grid>
                 </Grid>
